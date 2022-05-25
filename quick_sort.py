@@ -3,6 +3,9 @@ Input a list.
 Output a sorted list."""
 
 
+from re import A
+
+
 def quicksort(array, pivot_number=-1, head_compare=0):
 
     if array[pivot_number] > array[head_compare]:
@@ -40,10 +43,10 @@ def quicksort(array, pivot_number=-1, head_compare=0):
     if array[pivot_number] == array[head_compare]:
         print('caso 3', pivot_number, head_compare)
 
-        array_smaller = array[:pivot_number - 1]
+        array_smaller = array[:pivot_number - 3]
         array_bigger = array[pivot_number + 1:]
 
-        if array_bigger[0] >= array_bigger[-1]:
+        if array_bigger[-1] > array_bigger[0]:
             print('caso 3  first if')
 
             if abs(pivot_number) == abs(head_compare):
@@ -58,16 +61,32 @@ def quicksort(array, pivot_number=-1, head_compare=0):
             else:
                 print('case 3 first if / else ')
                 return array
-        else:
-            # print(array)
-            # print(pivot_number)
-            # print(head_compare)
-            # print(array_smaller[0])
-            # print(array_smaller[-1])
-            print(array.index(array_smaller[-1]),
-                  array.index(array_smaller[0]))
-            # return array
-            # return quicksort(array_smaller, array.index(array_smaller[-1]), array.index(array_smaller[0]))
+
+        if array_bigger[-1] < array_bigger[0]:
+            print('caso 3  second if')
+            return quicksort(array, )
+
+        if array_bigger[-1] == array_bigger[0]:
+            print('caso 3  third if')
+            print(array_bigger)
+            print(array_smaller)
+            print(array)
+            # print(array_bigger[0], array_bigger[-1])
+            # print(pivot_number, head_compare)
+
+        if array_smaller[-1] > array_smaller[0]:
+            print('is smaller entrou')
+            print(array_smaller)
+            return quicksort(array, array.index(array_smaller[-1]), array[0])
+
+        if array_smaller[-1] < array_smaller[0]:
+            print('is smaller saiu')
+            print(array_smaller)
+            return quicksort(array, array.index(array_smaller[-1-1], array[0]))
+
+        if array_smaller[-1] == array_smaller[0]:
+            print('é igual')
+            return array
 
 
 test = [21, 4, 1, 3, 9, 20, 25, 6, 21, 14]
