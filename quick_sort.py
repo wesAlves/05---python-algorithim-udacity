@@ -50,20 +50,23 @@ def quicksort(array, **kwargs):
             smaller_than = arr[:pivot_position]
             bigger_than = arr[pivot_position + 1:]
 
-            if len(smaller_than) > 3:
+            if len(smaller_than) > 3 and len(bigger_than) > 3:
 
-                print(smaller_than, 'start')
-                # print(bigger_than, 'start')
+                print(smaller_than, 'smallest start')
+                print(bigger_than, 'bigger start')
 
                 # if arr.index(smaller_than[0]) > 0:
                 print('pivot', pivot_position)
                 print('head', head_position)
 
+                final_index = max(index for index, item in enumerate(
+                    bigger_than) if item == arr[arr.index(arr[-1])])
+
                 last_is_bigger_than_first(
                     arr, head_position=arr.index(smaller_than[0]), pivot_position=arr.index(smaller_than[-1]))
 
-                # else:
-                #     return arr
+                # last_is_bigger_than_first(
+                #     arr, head_position=arr.index(bigger_than[0]), pivot_position=final_index)
 
             else:
                 print('is over')
