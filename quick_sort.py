@@ -44,6 +44,13 @@ def quicksort(array, **kwargs):
 
             return last_is_bigger_than_first(arr, pivot_position=pivot_position, head_position=new_head_position)
 
+        else:
+            smaller_than = arr[:pivot_position]
+            bigger_then = arr[pivot_position + 1:]
+
+            print(smaller_than, 'start')
+            print(bigger_then, 'start')
+
     array = last_is_bigger_than_first(array, **kwargs)
 
     return array
