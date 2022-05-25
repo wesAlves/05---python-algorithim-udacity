@@ -28,7 +28,7 @@ def quicksort(array, **kwargs):
 
             print(arr, 'end')
 
-            quicksort(arr, pivot_position=new_pivot_position)
+            return quicksort(arr, pivot_position=new_pivot_position)
 
         if arr[pivot_position] > arr[head_position]:
             print('second if')
@@ -42,7 +42,7 @@ def quicksort(array, **kwargs):
 
             print(arr)
 
-            last_is_bigger_than_first(
+            return last_is_bigger_than_first(
                 arr, pivot_position=pivot_position, head_position=new_head_position)
 
         else:
@@ -60,17 +60,25 @@ def quicksort(array, **kwargs):
                 print('head', head_position)
 
                 final_index = max(index for index, item in enumerate(
-                    bigger_than) if item == arr[arr.index(arr[-1])])
+                    bigger_than) if item == arr[arr.index(bigger_than[-1])])
 
-                last_is_bigger_than_first(
+                return last_is_bigger_than_first(
                     arr, head_position=arr.index(smaller_than[0]), pivot_position=arr.index(smaller_than[-1]))
-
-                # last_is_bigger_than_first(
-                #     arr, head_position=arr.index(bigger_than[0]), pivot_position=final_index)
 
             else:
                 print('is over')
+
+                print(bigger_than)
+
+                final_index = max(index for index, item in enumerate(
+                    bigger_than) if item == arr[arr.index(bigger_than[-1])])
+
+                first_index = int(len(bigger_than)/2 + 2)
+
                 return arr
+
+                # return last_is_bigger_than_first(
+                #     arr, head_position=arr.index(arr[first_index]), pivot_position=arr.index(arr[final_index]))
 
     array = last_is_bigger_than_first(array, **kwargs)
 
