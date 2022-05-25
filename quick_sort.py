@@ -6,87 +6,47 @@ Output a sorted list."""
 from re import A
 
 
-def quicksort(array, pivot_number=-1, head_compare=0):
+def quicksort(array, **kwargs):
 
-    if array[pivot_number] > array[head_compare]:
-        print('caso 1', pivot_number, head_compare)
+    def last_is_bigger_than_first(arr, head_position=0, pivot_position=-1):
+        if arr[pivot_position] < arr[head_position]:
+            print('if')
+            print(arr, 'start')
 
-        if head_compare + 1 < len(array):
-            print('caso 1 first if')
-            if array[pivot_number] > array[pivot_number - 1]:
-                print('caso 1 first if / if')
-                pivot_number += 1
-                head_compare += 1
+            print(head_position)
+            print(pivot_position)
+            print(arr, 'start')
 
-                return quicksort(array, pivot_number, head_compare)
-            else:
-                print('caso 1 first if /  else')
-                head_compare += 1
-                return quicksort(array, pivot_number, head_compare)
-        else:
-            print('caso 1 first else')
-            return quicksort(array)
+            temp_arr_0 = arr[head_position]
 
-    if array[pivot_number] < array[head_compare]:
-        print('caso 2', pivot_number, head_compare)
+            arr[head_position] = arr[pivot_position - 1]
+            arr[pivot_position - 1] = arr[pivot_position]
+            arr[pivot_position] = temp_arr_0
 
-        temp_element = array[head_compare]
+            # new_head_position =
+            new_pivot_position = pivot_position - 1
 
-        array[head_compare] = array[pivot_number - 1]
-        array[pivot_number - 1] = array[pivot_number]
-        array[pivot_number] = temp_element
+            print(arr, 'end')
 
-        pivot = pivot_number - 1
+            return quicksort(arr, pivot_position=new_pivot_position)
 
-        return quicksort(array, pivot, head_compare)
+        if arr[pivot_position] > arr[head_position]:
+            print('else')
+            print(arr, 'start')
 
-    if array[pivot_number] == array[head_compare]:
-        print('caso 3', pivot_number, head_compare)
+            print(head_position)
+            print(pivot_position)
+            print(arr, 'start')
 
-        array_smaller = array[:pivot_number - 3]
-        array_bigger = array[pivot_number + 1:]
+            new_head_position = head_position + 1
 
-        if array_bigger[-1] > array_bigger[0]:
-            print('caso 3  first if')
+            print(arr)
 
-            if abs(pivot_number) == abs(head_compare):
-                print('case 3 first if / first if')
+            return last_is_bigger_than_first(arr, pivot_position=pivot_position, head_position=new_head_position)
 
-                return quicksort(array, -1, array.index(array[head_compare + 1]))
+    array = last_is_bigger_than_first(array, **kwargs)
 
-            if abs(pivot_number) != abs(head_compare):
-                print('case 3 first if / second if ')
-                return quicksort(array, pivot_number - 1, head_compare)
-
-            else:
-                print('case 3 first if / else ')
-                return array
-
-        if array_bigger[-1] < array_bigger[0]:
-            print('caso 3  second if')
-            return quicksort(array, )
-
-        if array_bigger[-1] == array_bigger[0]:
-            print('caso 3  third if')
-            print(array_bigger)
-            print(array_smaller)
-            print(array)
-            # print(array_bigger[0], array_bigger[-1])
-            # print(pivot_number, head_compare)
-
-        if array_smaller[-1] > array_smaller[0]:
-            print('is smaller entrou')
-            print(array_smaller)
-            return quicksort(array, array.index(array_smaller[-1]), array[0])
-
-        if array_smaller[-1] < array_smaller[0]:
-            print('is smaller saiu')
-            print(array_smaller)
-            return quicksort(array, array.index(array_smaller[-1-1], array[0]))
-
-        if array_smaller[-1] == array_smaller[0]:
-            print('é igual')
-            return array
+    return array
 
 
 test = [21, 4, 1, 3, 9, 20, 25, 6, 21, 14]
