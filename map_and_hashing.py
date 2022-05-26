@@ -22,5 +22,7 @@ locations = {
 
 
 for key in locations.keys():
-    for country in locations[key]:
-        print(sorted(locations[key][country]))
+    if key != 'Africa':
+        for country in locations[key]:
+            for city in sorted(locations[key][country]):
+                print(city)
